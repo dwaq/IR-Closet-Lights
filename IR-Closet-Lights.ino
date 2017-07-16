@@ -18,10 +18,10 @@
 #include <IRLib_P01_NEC.h> 
 #include <IRLibCombo.h>
 
-// switch attached to door is on pin 12
+// switch attached to door on pin 12
 #define DOOR    12
 
-// states for button on door
+// states for switch on door
 #define OPEN     0
 #define CLOSED   1
 
@@ -45,7 +45,7 @@
 IRsend mySender;
 
 void setup() {
-  // switch is pulled up
+  // switch input pin is pulled up
   pinMode(DOOR, INPUT_PULLUP);
 }
 
@@ -53,11 +53,11 @@ void loop() {
   // start by turning on
   mySender.send(NEC, ON, 0);
   // loop until door is closed
-  while (digitalRead(DOOR) == OPEN);
+  while (digitalRead(DOOR) != CLOSED);
 
   // turn off lights
   mySender.send(NEC, OFF, 0);
   // loop until door is opened again
-  while (digitalRead(DOOR) == CLOSED);
+  while (digitalRead(DOOR) != OPEN);
 }
 
