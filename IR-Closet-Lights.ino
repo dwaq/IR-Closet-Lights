@@ -13,6 +13,7 @@
 // https://creativecommons.org/licenses/by/3.0/
 //*************************************************************************************************
 // include IR libraries for using NEC protocol
+// https://github.com/cyborg5/IRLib2
 #include <IRLibSendBase.h>
 #include <IRLib_P01_NEC.h> 
 #include <IRLibCombo.h>
