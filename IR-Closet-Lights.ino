@@ -42,6 +42,10 @@
 #define TIM_60  0xFF50AF
 #define TIM_120 0xFFD02F
 
+// used to fade lights when switching
+#define DELAY_ON 200
+#define DELAY_OFF 350
+
 IRsend mySender;
 
 void setup() {
@@ -51,11 +55,26 @@ void setup() {
 
 void loop() {
   // start by turning on
+  // defaults to 80% on power on
   mySender.send(NEC, ON, 0);
+  // increase to 100%
+  delay(DELAY_ON);
+  mySender.send(NEC, PCT_100, 0);
   // loop until door is closed
   while (digitalRead(DOOR) != CLOSED);
 
   // turn off lights
+  // slowly decrease to 10%
+  mySender.send(NEC, PCT_80, 0);
+  delay(DELAY_OFF);
+  mySender.send(NEC, PCT_40, 0);
+  delay(DELAY_OFF);
+  mySender.send(NEC, PCT_10, 0);
+  delay(DELAY_OFF);
+  // then decrease once more to 5%
+  mySender.send(NEC, DECR, 0);
+  delay(DELAY_OFF);
+  // then turn off
   mySender.send(NEC, OFF, 0);
   // loop until door is opened again
   while (digitalRead(DOOR) != OPEN);
