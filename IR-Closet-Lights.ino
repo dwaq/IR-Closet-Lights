@@ -34,13 +34,13 @@
 // Set brightness to these percentages
 #define PCT_10  0xFF20DF
 #define PCT_40  0xFFA05F
-#define PCT_80  0XFF906F
-#define PCT_100 0XFFE01F
+#define PCT_80  0xFF906F
+#define PCT_100 0xFFE01F
 // Set timer and turn off after this many minutes
-#define TIM_10  0XFF10EF
-#define TIM_30  0XFF609F
-#define TIM_60  0XFF50AF
-#define TIM_120 0XFFD02F
+#define TIM_10  0xFF10EF
+#define TIM_30  0xFF609F
+#define TIM_60  0xFF50AF
+#define TIM_120 0xFFD02F
 
 IRsend mySender;
 
