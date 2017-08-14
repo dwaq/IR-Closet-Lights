@@ -60,6 +60,9 @@ void loop() {
   // increase to 100%
   delay(DELAY_ON);
   mySender.send(NEC, PCT_100, 0);
+  // shut lights off after 10 minutes if door hasn't been closed
+  delay(DELAY_ON);
+  mySender.send(NEC, TIM_10, 0);
   // loop until door is closed
   while (digitalRead(DOOR) != CLOSED);
 
