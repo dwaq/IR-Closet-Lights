@@ -6,7 +6,7 @@
 //
 // Created in Arduino v1.8.2
 //
-// Description: 
+// Description:
 // Using Arduino Leonardo to switch lights using IR with door as trigger
 //
 // This work is licensed under a Creative Commons Attribution 3.0 Unported License.
@@ -15,7 +15,7 @@
 // include IR libraries for using NEC protocol
 // https://github.com/cyborg5/IRLib2
 #include <IRLibSendBase.h>
-#include <IRLib_P01_NEC.h> 
+#include <IRLib_P01_NEC.h>
 #include <IRLibCombo.h>
 
 // switch attached to door on pin 12
@@ -79,4 +79,3 @@ void loop() {
   // loop until door is opened again
   while (digitalRead(DOOR) != OPEN);
 }
-
