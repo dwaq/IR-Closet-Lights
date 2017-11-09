@@ -21,6 +21,9 @@
 // switch attached to door on pin 12
 #define DOOR    12
 
+// LDR attached to pin A0
+int LDR_Pin = A0;
+
 // states for switch on door
 #define OPEN     0
 #define CLOSED   1
@@ -80,5 +83,18 @@ void loop() {
   // then turn off
   mySender.send(NEC, OFF, 0);
   // loop until door is opened again
-  while (digitalRead(DOOR) != OPEN);
+  while (digitalRead(DOOR) != OPEN)
+  {
+    // door should be closed now, so the lights should be off
+    // but sometimes the lights don't turn off
+    // so let's read the light level
+    int LDRReading = analogRead(LDR_Pin);
+
+    // if it's too bright (lights are on)
+    if (LDRReading > 256)
+    {
+      // then turn them off
+      mySender.send(NEC, OFF, 0);
+    }
+  }
 }
