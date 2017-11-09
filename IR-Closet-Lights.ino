@@ -54,6 +54,8 @@ IRsend mySender;
 void setup() {
   // switch input pin is pulled up
   pinMode(DOOR, INPUT_PULLUP);
+
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -89,6 +91,8 @@ void loop() {
     // but sometimes the lights don't turn off
     // so let's read the light level
     int LDRReading = analogRead(LDR_Pin);
+
+    Serial.println(LDRReading);
 
     // if it's too bright (lights are on)
     if (LDRReading > 256)
