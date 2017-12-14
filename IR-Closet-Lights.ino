@@ -54,8 +54,8 @@ Button door(12);
 IRsend mySender;
 
 void setup() {
-  // switch input pin is pulled up
-  pinMode(DOOR, INPUT_PULLUP);
+  // set door switch as input
+  door.begin();
 }
 
 void loop() {
