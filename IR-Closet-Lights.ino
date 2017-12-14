@@ -24,11 +24,11 @@
 #include <Button.h>
 
 // switch attached to door on pin 12
-#define DOOR    12
 
 // states for switch on door
 #define OPEN     0
 #define CLOSED   1
+Button door(12);
 
 // All on or off
 #define ON      0xFF00FF
