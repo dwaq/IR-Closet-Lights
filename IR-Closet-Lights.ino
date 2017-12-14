@@ -24,10 +24,6 @@
 #include <Button.h>
 
 // switch attached to door on pin 12
-
-// states for switch on door
-#define OPEN     0
-#define CLOSED   1
 Button door(12);
 
 // All on or off
@@ -59,31 +55,35 @@ void setup() {
 }
 
 void loop() {
-  // start by turning on
-  // defaults to 80% on power on
-  mySender.send(NEC, ON, 0);
-  // increase to 100%
-  delay(DELAY_ON);
-  mySender.send(NEC, PCT_100, 0);
-  // shut lights off after 10 minutes if door hasn't been closed
-  delay(DELAY_ON);
-  mySender.send(NEC, TIM_10, 0);
-  // loop until door is closed
-  while (digitalRead(DOOR) != CLOSED);
+  // When door opens,
+  if (door.pressed())
+  {
+    // Turn on lights
+    // defaults to 80% on power on
+    mySender.send(NEC, ON, 0);
+    // increase to 100%
+    delay(DELAY_ON);
+    mySender.send(NEC, PCT_100, 0);
+    // shut lights off after 10 minutes if door hasn't been closed
+    delay(DELAY_ON);
+    mySender.send(NEC, TIM_10, 0);
+  }
 
-  // turn off lights
-  // slowly decrease to 10%
-  mySender.send(NEC, PCT_80, 0);
-  delay(DELAY_OFF);
-  mySender.send(NEC, PCT_40, 0);
-  delay(DELAY_OFF);
-  mySender.send(NEC, PCT_10, 0);
-  delay(DELAY_OFF);
-  // then decrease once more to 5%
-  mySender.send(NEC, DECR, 0);
-  delay(DELAY_OFF);
-  // then turn off
-  mySender.send(NEC, OFF, 0);
-  // loop until door is opened again
-  while (digitalRead(DOOR) != OPEN);
+  // When door closes
+  if (door.released())
+  {
+    // Turn off lights
+    // slowly decrease to 10%
+    mySender.send(NEC, PCT_80, 0);
+    delay(DELAY_OFF);
+    mySender.send(NEC, PCT_40, 0);
+    delay(DELAY_OFF);
+    mySender.send(NEC, PCT_10, 0);
+    delay(DELAY_OFF);
+    // then decrease once more to 5%
+    mySender.send(NEC, DECR, 0);
+    delay(DELAY_OFF);
+    // then turn off
+    mySender.send(NEC, OFF, 0);
+  }
 }
