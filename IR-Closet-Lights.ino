@@ -18,6 +18,11 @@
 #include <IRLib_P01_NEC.h>
 #include <IRLibCombo.h>
 
+// For debouncing the door switch
+// Search for "button tiny simple" in the Arduino Library Manager
+// to find the correct library by Michael Adams
+#include <Button.h>
+
 // switch attached to door on pin 12
 #define DOOR    12
 
