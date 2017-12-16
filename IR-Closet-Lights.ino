@@ -94,11 +94,12 @@ void loop() {
 
     Serial.println(LDRReading);
 
-    // if it's too bright (lights are on)
-    if (LDRReading > 256)
+    // if it's too bright i.e. lights are on (low is bright)
+    if (LDRReading < 1000)
     {
       // then turn them off
       mySender.send(NEC, OFF, 0);
+      delay(DELAY_OFF);
     }
   }
 }
