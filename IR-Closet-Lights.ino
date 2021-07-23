@@ -21,10 +21,10 @@
 // For debouncing the door switch
 // Search for "button tiny simple" in the Arduino Library Manager
 // to find the correct library by Michael Adams
-#include <Button.h>
+//#include <Button.h>
 
 // switch attached to door on pin 12
-Button door(12);
+//Button door(12);
 
 // All on or off
 #define ON      0xFF00FF
@@ -50,40 +50,16 @@ Button door(12);
 IRsend mySender;
 
 void setup() {
-  // set door switch as input
-  door.begin();
+  // Nothing to do here...
 }
 
 void loop() {
-  // When door opens,
-  if (door.pressed())
-  {
-    // Turn on lights
-    // defaults to 80% on power on
-    mySender.send(NEC, ON, 0);
-    // increase to 100%
-    delay(DELAY_ON);
-    mySender.send(NEC, PCT_100, 0);
-    // shut lights off after 10 minutes if door hasn't been closed
-    delay(DELAY_ON);
-    mySender.send(NEC, TIM_10, 0);
-  }
-
-  // When door closes
-  if (door.released())
-  {
-    // Turn off lights
-    // slowly decrease to 10%
-    mySender.send(NEC, PCT_80, 0);
-    delay(DELAY_OFF);
-    mySender.send(NEC, PCT_40, 0);
-    delay(DELAY_OFF);
-    mySender.send(NEC, PCT_10, 0);
-    delay(DELAY_OFF);
-    // then decrease once more to 5%
-    mySender.send(NEC, DECR, 0);
-    delay(DELAY_OFF);
-    // then turn off
-    mySender.send(NEC, OFF, 0);
-  }
+  // Turn on lights
+  // Just keep sending until they turn on...
+  
+  // defaults to 80% on power on
+  mySender.send(NEC, ON, 0);
+  // increase to 100%
+  delay(DELAY_ON);
+  mySender.send(NEC, PCT_100, 0);
 }
